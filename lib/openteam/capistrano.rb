@@ -1,4 +1,5 @@
-require "openteam-capistrano/version"
+require "openteam/capistrano/version"
+require "openteam/capistrano/base"
 
 module Openteam
   module Capistrano
