@@ -1,3 +1,13 @@
+require 'bundler/capistrano'
+require 'rvm/capistrano'
+require 'capistrano/ext/multistage'
+
+#require 'capistrano-deploytags'
+require 'capistrano-db-tasks'
+require 'capistrano-unicorn'
+begin; require 'airbrake/capistrano'; rescue LoadError; end
+begin; require 'whenever/capistrano'; resque LoadError; end
+
 Capistrano::Configuration.instance.load do
   def deploy_config_parsed_yaml
     YAML::load(File.open('config/deploy.yml'))
@@ -9,7 +19,7 @@ Capistrano::Configuration.instance.load do
 
   def run_rake(task, options={})
     directory = options[:in] || release_path
-    run "'d #{directory} && #{rake} RAILS_ENV=#{rails_env} #{task}"
+    run "cd #{directory} && #{rake} RAILS_ENV=#{rails_env} #{task}"
   end
 
   set(:application)       { deploy_config['application'] }
@@ -27,23 +37,31 @@ Capistrano::Configuration.instance.load do
 
   set :keep_releases,     7
 
-  # capistrano-db-tasks
-  # we do not need dump file after loading
-  set :db_local_clean,    true
+  # this files will be symlinked from shared to current path on deploy
+  set :shared_children,   %w[config/settings.yml config/database.yml log tmp/sockets tmp/pids]
 
   # for assets compilation on host with nodejs
   set :default_shell,     "bash -l"
+
+  # make bin stubs for candy console rails runs
+  set :bundle_flags,      "--binstubs --deployment --quiet"
+
+  # gem capistrano-db-tasks
+  # we do not need dump file after db:pull
+  set :db_local_clean,    true
+
+  # gem whenever
+  # point to bundled version of whenever command
+  set :whenever_command,  "bundle exec whenever"
 
   # set up hooks
   after('multistage:ensure') do
     server domain, :app, :web, :db, :primary => true
   end
 
-  after('deploy:finalize_update') do
-    run "ln -s #{shared_path}/config/settings.yml #{release_path}/config/settings.yml"
-    run "ln -s #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-    run "ln -s #{shared_path}/config/unicorn.rb #{release_path}/config/unicorn.rb"
-  end
+  after "deploy:update_code", "deploy:migrate"
 
-  after "deploy",         "deploy:migrate"
+  after "deploy",             "unicorn:restart"
+
+  after "deploy",             "deploy:cleanup"
 end

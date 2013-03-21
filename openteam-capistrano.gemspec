@@ -22,5 +22,4 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'capistrano-unicorn'
   gem.add_dependency 'capistrano-deploytags'
   gem.add_dependency 'capistrano-db-tasks'
-  gem.add_dependency 'capistrano-git-plugins'
 end
