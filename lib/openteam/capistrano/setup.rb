@@ -17,7 +17,11 @@ Capistrano::Configuration.instance.load do
       set :domain,            deploy_config['domain']
       set :gateway,           deploy_config['gateway'] if deploy_config.has_key? 'gateway'
 
+      # application root
       set :deploy_to,         "/srv/#{application}"
+
+      # do not use sudo by default
+      set :use_sudo,          false
 
       # source repostitory settings
       set :scm,               :git
