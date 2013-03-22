@@ -5,10 +5,10 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 Gem::Specification.new do |gem|
   gem.name          = 'openteam-capistrano'
   gem.version       = '0.0.1'
-  gem.authors       = ["Dmitry Lihachev"]
-  gem.email         = ["lda@openteam.ru"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.authors       = ["OpenTeam developers"]
+  gem.email         = ["developers@openteam.ru"]
+  gem.description   = %q{OpenTeam common capistrano recipe}
+  gem.summary       = %q{Adds common use case tasks (import db, reload unicorn, send airbrake notice, tag deploy)}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)
