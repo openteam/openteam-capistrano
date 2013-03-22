@@ -4,8 +4,12 @@ Capistrano::Configuration.instance.load do
     server domain, :app, :web, :db, :primary => true
   end
 
-  after "deploy:update_code", "deploy:migrate"
+  after 'deploy:update_code', 'deploy:migrate'
 
-  after "deploy",             "unicorn:restart"
-  after "deploy",             "deploy:cleanup"
+  after 'deploy:restart',     'unicorn:restart'
+
+  after 'deploy',             'deploy:cleanup'
+  before 'deploy:cleanup',    'tagging:cleanup'
+
+  after 'deploy',             'tagging:deploy'
 end
