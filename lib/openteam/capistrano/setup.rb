@@ -20,10 +20,10 @@ Capistrano::Configuration.instance.load do
   set :shared_children,   %w[config/settings.yml config/database.yml log tmp/sockets tmp/pids]
 
   # for assets compilation on host with nodejs
-  set :default_shell,     "bash -l"
+  set :default_shell,     'bash -l'
 
   # make bin stubs for candy console rails runs
-  set :bundle_flags,      "--binstubs --deployment --quiet"
+  set :bundle_flags,      '--binstubs --deployment --quiet'
 
   # gem capistrano-db-tasks
   # we do not need dump file after db:pull
@@ -31,5 +31,8 @@ Capistrano::Configuration.instance.load do
 
   # gem whenever
   # point to bundled version of whenever command
-  set :whenever_command,  "bundle exec whenever"
+  set :whenever_command,  'bundle exec whenever'
+
+  # tagging needs this
+  set :local_user,        ENV['USER'] || ENV['USERNAME']
 end

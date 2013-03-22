@@ -16,10 +16,9 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
+  gem.add_dependency 'capistrano-db-tasks'
   gem.add_dependency 'capistrano-ext'
   gem.add_dependency 'capistrano-unicorn'
-  gem.add_dependency 'capistrano-deploytags'
-  gem.add_dependency 'capistrano-db-tasks'
   gem.add_dependency 'rvm-capistrano'
 
   gem.add_development_dependency 'rake'
