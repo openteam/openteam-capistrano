@@ -1,8 +1,10 @@
 # set up hooks
 Capistrano::Configuration.instance.load do
-  after('multistage:ensure') do
-    server domain, :app, :web, :db, :primary => true
-  end
+  after 'multistage:ensure',  'openteam:setup'
+
+  #after('multistage:ensure') do
+    #server domain, :app, :web, :db, :primary => true
+  #end
 
   after 'deploy:update_code', 'deploy:migrate'
 
