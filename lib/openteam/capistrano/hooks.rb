@@ -5,11 +5,6 @@ Capistrano::Configuration.instance.load do
   end
 
   after 'deploy:update_code', 'deploy:migrate'
-
   after 'deploy:restart',     'unicorn:restart'
-
   after 'deploy',             'deploy:cleanup'
-  before 'deploy:cleanup',    'tagging:cleanup'
-
-  after 'deploy',             'tagging:deploy'
 end

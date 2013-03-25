@@ -1,4 +1,7 @@
 Capistrano::Configuration.instance.load do
+  before 'deploy:cleanup', 'tagging:cleanup'
+  after  'deploy',         'tagging:deploy'
+
   namespace :tagging do
     def tag_name(options={})
       formatted_local_time = DateTime.strptime(options[:for], '%Y%m%d%H%M%S').to_time.strftime("%Y.%m.%d-%H%M")
