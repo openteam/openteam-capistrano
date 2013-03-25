@@ -1,4 +1,6 @@
 Capistrano::Configuration.instance.load do
+  after 'multistage:ensure', 'openteam:setup'
+
   namespace :openteam do
     task :setup do
       def deploy_config
@@ -49,6 +51,9 @@ Capistrano::Configuration.instance.load do
 
       # tagging needs this
       set :local_user,        ENV['USER'] || ENV['USERNAME']
+
+      # subscriber name
+      set :subscriber_name,   "#{application}-subscriber"
 
       # setup server
       server domain, :app, :web, :db, :primary => true
