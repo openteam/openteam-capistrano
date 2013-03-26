@@ -1,22 +1,9 @@
 Capistrano::Configuration.instance.load do
-  def deploy_config
-    @deploy_config ||= YAML::load(File.open('config/deploy.yml'))[stage.to_s]
-  end
-
-  set(:application)       { deploy_config['application'] }
-  set(:domain)            { deploy_config['domain'] }
-  set(:gateway)           { deploy_config['gateway'] }
-
-  set(:deploy_to)         { "/srv/#{application}" }
+  # do not use sudo by default
+  set :use_sudo,          false
 
   # source repostitory settings
-  set :scm,               :git
-  set(:repository)        { `git config --get remote.origin.url`.strip }
-  set :branch,            :master
-  set :deploy_via,        :remote_cache
-  set :ssh_options,       { :forward_agent => true }
-
-  # this files will be symlinked from shared to current path on deploy
+  # this files will be symlinked from shared to current path on deploy:create_symlinks
   set :shared_children,   %w[config/settings.yml config/database.yml log tmp/sockets tmp/pids]
 
   # for assets compilation on host with nodejs
