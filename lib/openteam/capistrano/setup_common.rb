@@ -4,7 +4,11 @@ Capistrano::Configuration.instance.load do
 
   # source repostitory settings
   # this files will be symlinked from shared to current path on deploy:create_symlinks
-  set :shared_children,   %w[config/settings.yml config/database.yml log tmp/sockets tmp/pids]
+  if use_db?
+    set :shared_children,   %w[config/database.yml config/settings.yml log tmp/sockets tmp/pids]
+  else
+    set :shared_children,   %w[config/settings.yml log tmp/sockets tmp/pids]
+  end
 
   # for assets compilation on host with nodejs
   set :default_shell,     'bash -l'
