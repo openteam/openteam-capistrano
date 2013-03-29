@@ -13,7 +13,7 @@ class Solr
     end
 
     def replicate
-      if remote.index_version == local.index_version
+      if same_versions?
         puts 'local and remote index versions are same, no need for replication'
       else
         really_replicate
@@ -24,21 +24,20 @@ class Solr
     def really_replicate
       print 'wait while solr replicated '
       local.send_replication_command :fetchindex, :masterUrl => "#{remote.url}/replication"
-      while replicating?
+      while !same_versions?
         print '.'
         sleep 0.5
       end
       puts ' ok'
     end
 
-    def replicating?
-      # FIXME: cann't use details command due https://issues.apache.org/jira/browse/SOLR-3131
-      local.send_replication_command(:filelist, :indexversion => remote.index_version)['status'] == 'invalid indexversion'
-    end
-
     def print(*args)
       STDOUT.print *args
       STDOUT.sync
+    end
+
+    def same_versions?
+      remote.index_version == local.index_version
     end
   end
 
@@ -49,7 +48,7 @@ class Solr
   end
 
   def index_version
-    send_replication_command(:details)['details']['indexVersion']
+    send_replication_command(:indexversion)['indexversion']
   end
 
   def send_replication_command(command, extra={})
