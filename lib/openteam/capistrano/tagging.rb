@@ -26,6 +26,7 @@ Capistrano::Configuration.instance.load do
 
     desc "Remove release tag from local and origin repo"
     task :cleanup do
+      run_locally 'git fetch --tags'
       count = fetch(:keep_releases, 5)
 
       if count >= releases.size
