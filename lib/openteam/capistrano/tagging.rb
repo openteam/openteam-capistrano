@@ -21,8 +21,9 @@ Capistrano::Configuration.instance.load do
 
     set(:stage_tags) do
       run_locally('git fetch --tags')
-      run_locally("git tag -l | grep ^#{stage}-").chomp.split("\n")
+      run_locally("git tag -l").chomp.split("\n").grep(/^#{stage}-/)
     end
+
     set(:kept_releases_count) { fetch(:keep_releases, 5) }
     set(:kept_releases) { releases.last(kept_releases_count) }
     set(:kept_tags) { kept_releases.map{|release| tag_name(:for => release)} }
