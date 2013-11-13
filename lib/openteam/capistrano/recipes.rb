@@ -8,5 +8,9 @@ require "openteam/capistrano/setup_common"
 require "openteam/capistrano/setup_deploy"
 require "openteam/capistrano/setup_git"
 require "openteam/capistrano/subscriber"
-require "openteam/capistrano/sunspot"
+begin
+  require "rsolr"
+  require "openteam/capistrano/sunspot"
+rescue LoadError
+end
 require "openteam/capistrano/tagging"
