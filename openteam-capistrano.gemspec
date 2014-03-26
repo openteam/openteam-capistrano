@@ -21,6 +21,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'capistrano-db-tasks', '~> 0.3'
   gem.add_dependency 'capistrano-rails',    '~> 1.1'
   gem.add_dependency 'capistrano-rvm'
+  gem.add_dependency 'capistrano-sidekiq'
   gem.add_dependency 'capistrano3-unicorn'
 
   gem.add_development_dependency 'rake'
