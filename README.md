@@ -1,34 +1,40 @@
 # Openteam::Capistrano
 
-TODO: Write a gem description
+Добавлена поддержка Capistrano v3.
 
-## Installation
+## Установка
 
-Add this line to your application's Gemfile:
+Добавить в Gemfile:
 
     gem 'openteam-capistrano', '~> 1.0.0', :require => false
 
-And then execute:
+Затем выполнить:
 
     $ bundle
 
-Or install it yourself as:
+Или установить gem:
 
     $ gem install openteam-capistrano
 
-## Usage
+## Использование
 
-* Удаляем все что связано с capistrano v2
+* Удаляем все что связано с capistrano v2 (Capfile, config/deploy.rb, config/deploy/)
 * Ставим gem openteam-capistrano
+
+Запускаем генератор:
+
+    $ rails g openteam:capistrano:install
+    
+Деплой приложения:
+
+    $ bundle exec cap STAGE deploy
+
+или:
+
+    $ bin/cap STAGE deploy
 
 ## Схема работы с бренчами
 
-В openteam-capistrano изменилась схема деплоя.
+В Capistrano v3 изменилась схема работы со стейджами - теперь обязательно указывать стейдж при деплое. Опция set :default_stage была удалена.
 
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+В папке config/deploy/ должен лежать пустой файл с именем стейджа, деплой должен происходить из бранча с таким же именем что и стейдж. 
