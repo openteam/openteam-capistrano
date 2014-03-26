@@ -30,7 +30,7 @@ module Openteam
       end
 
       def stage_tags
-        @stage_tags ||= %x( git tag -l origin/#{fetch(:branch)} ).chomp.split("\n").grep(/^#{fetch(:stage)}-/)
+        @stage_tags ||= %x( git tag -l #{fetch(:branch)}* ).chomp.split("\n").grep(/^#{fetch(:stage)}-/)
       end
 
       def rotten_tags
