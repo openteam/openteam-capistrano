@@ -66,3 +66,7 @@ end
 def used_unicorn?
   !@used_unicorn.nil?
 end
+
+def used_whenever?
+  @used_whenever ||= File.exists?('config/schedule.rb')
+end
