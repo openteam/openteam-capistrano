@@ -5,6 +5,7 @@ if fetch(:stage)
   require 'openteam/capistrano/app_config'
   require 'openteam/capistrano/git'
   require 'openteam/capistrano/hooks'
+  require 'openteam/capistrano/sidekiq'           if used_sidekiq?
   require 'openteam/capistrano/shared'
   require 'openteam/capistrano/ssh'
   require 'openteam/capistrano/tagging'
