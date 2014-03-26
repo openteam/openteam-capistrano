@@ -10,4 +10,5 @@ if fetch(:stage)
   require 'openteam/capistrano/ssh'
   require 'openteam/capistrano/tagging'
   require 'openteam/capistrano/unicorn'           if used_unicorn?
+  require 'openteam/capistrano/whenever'          if used_whenever?
 end
