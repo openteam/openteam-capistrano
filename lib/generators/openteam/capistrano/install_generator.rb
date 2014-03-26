@@ -14,6 +14,10 @@ module Openteam
       def create_deploy_stages
         template 'config/deploy/production.rb'
       end
+
+      def create_unicorn_config
+        template 'config/unicorn.rb'
+      end
     end
   end
 end
