@@ -6,7 +6,7 @@
 
 Добавить в Gemfile:
 
-    gem 'openteam-capistrano', '~> 1.0.0'
+    gem 'openteam-capistrano', '~> 1.0.4'
 
 Затем выполнить:
 
@@ -24,6 +24,9 @@
 Запускаем генератор:
 
     $ rails g openteam:capistrano:install
+    
+В папке config/deploy/ должны остаться файлы соответствующие стейджам.
+В Capfile необходимо раcкомментировать необходимые задачи для Sidekiq и Whenever если это необходимо.
     
 Деплой приложения:
 
