@@ -6,7 +6,7 @@ TODO: Write a gem description
 
 Add this line to your application's Gemfile:
 
-    gem 'openteam-capistrano'
+    gem 'openteam-capistrano', '~> 1.0.0', :require => false
 
 And then execute:
 
@@ -18,7 +18,12 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+* Удаляем все что связано с capistrano v2
+* Ставим gem openteam-capistrano
+
+## Схема работы с бренчами
+
+В openteam-capistrano изменилась схема деплоя.
 
 ## Contributing
 
