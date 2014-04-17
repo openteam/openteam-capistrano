@@ -6,7 +6,7 @@
 
 Добавить в Gemfile:
 
-    gem 'openteam-capistrano', '~> 1.0.4'
+    gem 'openteam-capistrano', '~> 1.0.7'
 
 Затем выполнить:
 
