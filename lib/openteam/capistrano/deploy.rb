@@ -1,4 +1,4 @@
-if fetch(:stage)
+if fetch(:stage) && !fetch(:stage).empty?
   require 'openteam/capistrano/helpers'
   require 'openteam/capistrano/capistrano_config'
   require 'openteam/capistrano/deploy_config'
