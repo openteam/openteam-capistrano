@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |gem|
   gem.name          = 'openteam-capistrano'
-  gem.version       = '1.0.7'
+  gem.version       = '1.0.8'
   gem.authors       = ["OpenTeam developers"]
   gem.email         = ["developers@openteam.ru"]
   gem.description   = %q{OpenTeam common capistrano3 recipe}
