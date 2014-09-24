@@ -11,5 +11,4 @@ if fetch(:stage) && !fetch(:stage).empty?
   require 'openteam/capistrano/tagging'
   require 'openteam/capistrano/unicorn'           if used_unicorn?
   require 'openteam/capistrano/whenever'          if used_whenever?
-  require "openteam/capistrano/sunspot"           if used_solr?
 end
