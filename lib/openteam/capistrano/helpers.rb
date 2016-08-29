@@ -34,7 +34,6 @@ begin
 rescue LoadError
 end
 
-
 def used_db?
   !@used_db.nil?
 end
@@ -44,7 +43,7 @@ def used_delayed_job?
 end
 
 def used_deploy_config?
-  @used_deploy_config ||= File.exists?('config/deploy.yml')
+  @used_deploy_config ||= File.exist?('config/deploy.yml')
 end
 
 def used_sidekiq?
@@ -52,7 +51,7 @@ def used_sidekiq?
 end
 
 def used_rails?
-  @used_rails ||= File.exists?('config/application.rb') && File.exists?('config/environment.rb')
+  @used_rails ||= File.exist?('config/application.rb') && File.exist?('config/environment.rb')
 end
 
 def used_rmq?
@@ -68,5 +67,5 @@ def used_unicorn?
 end
 
 def used_whenever?
-  @used_whenever ||= File.exists?('config/schedule.rb')
+  @used_whenever ||= File.exist?('config/schedule.rb')
 end

@@ -18,7 +18,7 @@ begin
   end
 
   namespace :sunspot do
-    desc "Synchronize your local solr using remote solr data"
+    desc 'Synchronize your local solr using remote solr data'
     task :pull do
       puts
       remote_solr_url = ''
@@ -28,7 +28,7 @@ begin
         remote_solr_url = capture(:ruby, " -ryaml -e \"#{ruby_expression}\"")
       end
 
-      Solr::Replicator.new(:remote => remote_solr_url, :local => development_solr_url).replicate
+      Solr::Replicator.new(remote: remote_solr_url, local: development_solr_url).replicate
     end
 
     desc 'Reload development core'

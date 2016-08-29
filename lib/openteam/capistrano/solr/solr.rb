@@ -21,9 +21,10 @@ class Solr
     end
 
     private
+
     def really_replicate
       print 'Wait while solr replicated '
-      local.send_replication_command :fetchindex, :masterUrl => "#{remote.url}"
+      local.send_replication_command :fetchindex, masterUrl: remote.url.to_s
       while base_local_index_version == local.index_version
         print '.'
         sleep 0.5
@@ -48,28 +49,28 @@ class Solr
   end
 
   def send_version_command
-    send_command 'replication',         :params => { :command => :indexversion}
+    send_command 'replication',         params: { command: :indexversion }
   end
 
-  def send_replication_command(command, extra={})
-    send_command 'replication',         :params => { :command => command }.merge(extra)
-    puts "Index has been successfully received"
+  def send_replication_command(command, extra = {})
+    send_command 'replication',         params: { command: command }.merge(extra)
+    puts 'Index has been successfully received'
   end
 
   def send_reload_core_command(core)
-    send_command '/cores/admin/cores',  :params => { :action => 'RELOAD', :core => core }
+    send_command '/cores/admin/cores', params: { action: 'RELOAD', core: core }
     puts "The '#{core}' core has been successfully reloaded"
   end
 
   def send_clear_command(core)
-    send_command 'update',              :params => { :commit => true, 'stream.body' => '<delete><query>*:*</query></delete>' }
+    send_command 'update', params: { :commit => true, 'stream.body' => '<delete><query>*:*</query></delete>' }
     puts "The '#{core}' core has been successfully cleared"
   end
 
   private
 
   def solr
-    @solr ||= RSolr.connect :url => url
+    @solr ||= RSolr.connect url: url
   end
 
   def send_command(href, params)
@@ -78,10 +79,9 @@ class Solr
     STDERR.puts "!!! ensure solr started on '#{url}' !!!"
     puts "Couldn't connect to '#{url}'"
     exit
-  rescue RSolr::Error::Http  #=> e
-    STDERR.puts "!!! RSolr error !!!"
+  rescue RSolr::Error::Http #=> e
+    STDERR.puts '!!! RSolr error !!!'
     puts "Could not perform action '#{href}'"
     exit
   end
-
 end

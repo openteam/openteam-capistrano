@@ -1,3 +1,3 @@
-set :repo_url, %x( git config --get remote.origin.url ).chomp
+set :repo_url, `git config --get remote.origin.url`.chomp
 set :branch,   fetch(:stage)
-set :user,     %x( git config --get user.name ).chomp
+set :user,     `git config --get user.name`.chomp
