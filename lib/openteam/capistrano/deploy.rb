@@ -11,4 +11,9 @@ if fetch(:stage) && !fetch(:stage).empty?
   require 'openteam/capistrano/tagging'
   require 'openteam/capistrano/unicorn'           if used_unicorn?
   require 'openteam/capistrano/whenever'          if used_whenever?
+
+  if used_settings?
+    require 'configliere'
+    Settings.read('config/settings.yml')
+  end
 end

@@ -69,3 +69,7 @@ end
 def used_whenever?
   @used_whenever ||= File.exist?('config/schedule.rb')
 end
+
+def used_settings?
+  @used_settings ||= File.exist?('config/settings.yml')
+end
