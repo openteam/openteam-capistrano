@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'capistrano-rvm'
   gem.add_dependency 'capistrano-sidekiq'
   gem.add_dependency 'capistrano3-unicorn'
-  gem.add_dependency 'slackistrano', '3.1.0.beta'
+  gem.add_dependency 'slackistrano', '~> 3.1.0'
 
   gem.add_development_dependency 'rake'
 end
