@@ -1,4 +1,7 @@
 require 'openteam/capistrano/deploy'
 
-set :slackistrano, channel: '#your-channel',
-                   webhook: 'your-incoming-webhook-url'
+# append :linked_dirs, 'data'
+
+set :slackistrano,
+  channel: (Settings['slack.channel'] rescue ''),
+  webhook: (Settings['slack.webhook'] rescue '')
