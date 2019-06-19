@@ -17,14 +17,14 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
 
   gem.add_dependency 'airbrake' # ,            '~> 3.1.16'
-  gem.add_dependency 'capistrano', '~> 3.5.0'
+  gem.add_dependency 'capistrano', '~> 3.5'
   gem.add_dependency 'capistrano-db-tasks' # , '~> 0.3'
   gem.add_dependency 'capistrano-rails' # ,    '~> 1.1'
   gem.add_dependency 'capistrano-faster-assets' # ,    '~> 1.0'
   gem.add_dependency 'capistrano-rvm'
   gem.add_dependency 'capistrano-sidekiq'
   gem.add_dependency 'capistrano3-unicorn'
-  gem.add_dependency 'slackistrano', '~> 3.1.0'
+  gem.add_dependency 'slackistrano' # , '~> 3.1.0'
 
   gem.add_development_dependency 'rake'
 end
